@@ -1,9 +1,13 @@
 {
-  "name": "rollup-start-lib",
-  "version": "1.0.0",
+  "name": "@solaldr/animate",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
+  "license": "MIT",
+  "homepage": "https://www.github.com/SolalDR/emitter",
+  "repository": "https://www.github.com/SolalDR/emitter",
+  "bugs": "https://www.github.com/SolalDR/emitter/issues",
   "devDependencies": {
     "rollup": "^1.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -13,7 +17,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "node test/test.js",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "publish": "npm publish --access public"
   },
   "files": [
     "dist"
