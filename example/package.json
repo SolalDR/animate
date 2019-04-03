@@ -1,0 +1,15 @@
+{
+  "name": "rollum-starter-lib-example",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel serve index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solaldr/emitter": "^0.1.0"
+  }
+}
