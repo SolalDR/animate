@@ -1,32 +1,45 @@
-# rollup-starter-lib
+# Animate
 
-Forked from <a href="https://github.com/rollup/rollup-starter-lib">https://github.com/rollup/rollup-starter-lib</a>
-
-This repo contains a bare-bones example of how to create a library using Rollup, including importing a module from `node_modules` and converting it from CommonJS.
+A lightweight JS library for animation.
 
 ## Getting started
 
 Clone this repository and install its dependencies:
 
-```bash
-git clone https://github.com/SolalDR/rollup-starter-lib/
-cd rollup-starter-lib
-npm install
+With npm:
+```
+npm install @solaldr/animate
 ```
 
-`npm run build` builds the library to `dist`, generating three files:
+With yarn:
+```
+yarn add @solaldr/animate
+```
 
-* `dist/index.js`
-    A CommonJS bundle, suitable for use in Node.js, that `require`s the external dependency. This corresponds to the `"main"` field in package.json
-* `dist/index.esm.js`
-    an ES module bundle, suitable for use in other people's libraries and applications, that `import`s the external dependency. This corresponds to the `"module"` field in package.json
-* `dist/index.umd.js`
-    a UMD build, suitable for use in any environment (including the browser, as a `<script>` tag), that includes the external dependency. This corresponds to the `"browser"` field in package.json
+## How to use
 
-`npm run dev` builds the library, then keeps rebuilding it whenever the source files change using [rollup-watch](https://github.com/rollup/rollup-watch).
+``` javascript
+import animate, {Animate, Animation, Easing} from "@solaldr/animate";
 
-`npm test` builds the library, then tests it.
+// Start the global animate raf 
+animate.start();
 
+animate.add({
+    from: 0,
+    to: 1000,
+    duration: 5000, // default 1000 (ms)
+    timingFunction: "easeInOutQuad", // default "linear"
+})
+.on('progress', ({ value, advancement }) => {
+    // Easing value between 0 and 1000
+    console.log(value); 
+    // Easing value between 0 and 1
+    console.log(advancement); 
+})
+.on('end', () => {
+    // Triggered at the end of the anim
+})
+```
 
 ## License
 
