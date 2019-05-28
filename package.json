@@ -5,9 +5,9 @@
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
   "license": "MIT",
-  "homepage": "https://www.github.com/SolalDR/emitter",
-  "repository": "https://www.github.com/SolalDR/emitter",
-  "bugs": "https://www.github.com/SolalDR/emitter/issues",
+  "homepage": "https://github.com/SolalDR/animate",
+  "repository": "https://github.com/SolalDR/animate",
+  "bugs": "https://www.github.com/SolalDR/animate/issues",
   "devDependencies": {
     "rollup": "^1.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
