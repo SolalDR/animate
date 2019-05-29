@@ -19,7 +19,7 @@ yarn add @solaldr/animate
 ## How to use
 
 ``` javascript
-import animate, {Animate, Animation, Easing} from "@solaldr/animate";
+import animate from "@solaldr/animate";
 
 // Start the global animate raf 
 animate.start();
@@ -39,6 +39,40 @@ animate.add({
 .on('end', () => {
     // Triggered at the end of the anim
 })
+```
+
+### Object syntax
+``` javascript
+import animate, {Animation} from "@solaldr/animate";
+
+animate.start();
+animate.add(new Animation({
+  ... options here
+}))
+```
+
+### Easings
+
+You may want to use different Easing method inside the same animation
+
+``` javascript
+import animate, {Easing} from "@solaldr/animate";
+
+animate.start();
+
+// Default 1000ms interpolate from 0 to 1
+animate.add().on('progress', ({ advancement }) => {
+  const myEasingValue = Easing.easeInQuad(advancement);
+});
+```
+
+### Custom animation manager
+``` javascript
+import {Animate} from "@solaldr/animate";
+
+const myAnimationManager = new Animate();
+myAnimationManager.start();
+myAnimationManager.add({ ... });
 ```
 
 ## License
