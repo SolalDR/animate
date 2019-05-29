@@ -1,6 +1,9 @@
 # Animate
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/af311063cdf1cb9552c3/maintainability)](https://codeclimate.com/github/SolalDR/animate/maintainability)
+
 A lightweight JS library for animation.
+No abstraction of DOM is provide, this lib just interpolate values through time with a evenmential system.
 
 ## Getting started
 
