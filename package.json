@@ -1,6 +1,6 @@
 {
   "name": "@solaldr/animate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",

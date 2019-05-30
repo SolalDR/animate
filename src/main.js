@@ -56,11 +56,15 @@ class Animate extends Emitter {
   start({
     speed = 1,
     fps = null,
+    auto = true,
   } = {}) {
     this.speed = speed;
     this.fps = fps;
     this._interval = this.fps ? 1000/this.fps : 1;  
-    this.loop();
+
+    if (auto) {
+      this.loop();
+    }
   }
   
   /**
