@@ -17,14 +17,17 @@ window.addEventListener('load', ()=>{
     var anim = null;
     node.addEventListener('mouseenter', () => {
       if (anim) return;
+      var a = 0;
       anim = animate.add({
         to: 100,
         duration: 1000,
         timingFunction: key
       }).on('progress', ({value})=>{
         rangeNode.value = value;
+        a++;
       }).on('end', () => {
         anim = null;
+        console.log(a);
       })
     });
 
@@ -37,14 +40,19 @@ window.addEventListener('load', ()=>{
 
   element.style.display = 'none';
 
+
+  var square = document.querySelector('#square');
   animate.add({
-    duration: 1000,
-    timingFunction: 'easeInOutQuad',
+    from: 0,
+    to: 500,
+  }).on('progress', ({value})=>{
+    square.style.top = value + 'px';
   })
-  .on('progress', (e) => {
-    console.log(e);
-  })
-  .on('end', (e) => {
-    console.log(e);
+  
+  animate.then({
+    from: 500,
+    to: 0,
+  }).on('progress', ({value}) => {
+    square.style.top = value + 'px';
   })
 })

@@ -47,8 +47,8 @@ class Animation extends Emitter {
     if (!this.playing) return;
 
     this.current = Math.min(this.duration, this.current + delta);
-    this.advancement = this.timingFunction(this.current / this.duration);
-    this.value = this.from + (this.to - this.from) * this.advancement;
+    this.advancement = this.current / this.duration;
+    this.value = this.from + (this.to - this.from) * this.timingFunction(this.advancement);
 
     this.emit("progress", this);
 
