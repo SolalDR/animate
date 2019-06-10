@@ -16,18 +16,20 @@ window.addEventListener('load', ()=>{
     
     var anim = null;
     node.addEventListener('mouseenter', () => {
+      console.time('test');
       if (anim) return;
       var a = 0;
       anim = animate.add({
         to: 100,
-        duration: 1000,
+        duration: 7000,
         timingFunction: key
       }).on('progress', ({value})=>{
         rangeNode.value = value;
         a++;
       }).on('end', () => {
         anim = null;
-        console.log(a);
+        console.log('end anim', a);
+        console.timeEnd('test');
       })
     });
 
