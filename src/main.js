@@ -61,10 +61,8 @@ class Animate extends Emitter {
     this.speed = speed;
     this.fps = fps;
     this._interval = this.fps ? 1000/this.fps : 1;  
-
-    if (auto) {
-      this.loop();
-    }
+    this.auto = auto;
+    if (this.auto) this.loop();
   }
   
   /**
@@ -77,10 +75,10 @@ class Animate extends Emitter {
     if (this.delta > this._interval) {
       this.render((this.delta - (this.delta % this._interval)) * this.speed);
       this._last = this._now;
-    } 
-
-		requestAnimationFrame(this.loop.bind(this));
-	}
+    }
+    
+    if(this.auto) requestAnimationFrame(this.loop.bind(this));
+  }
 
   /**
    * Render all the animations

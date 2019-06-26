@@ -21,7 +21,7 @@ export default {
   easeInOutSine: function(t) { return (-0.5 * (Math.cos(Math.PI*t) -1)) },
   easeInExpo: function(t) { return (t===0) ? 0 : Math.pow(2, 10 * (t - 1)) },
   easeOutExpo: function(t) { return (t===1) ? 1 : -Math.pow(2, -10 * t) + 1 },
-  easeInOutExpo: function(poms) {
+  easeInOutExpo: function(t) {
     if(t===0) return 0;
     if(t===1) return 1;
     if((t/=0.5) < 1) return 0.5 * Math.pow(2,10 * (t-1));

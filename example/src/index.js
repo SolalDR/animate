@@ -1,5 +1,13 @@
 import animate, {Easing} from "./../../dist/index.umd.js";
-animate.start();
+animate.start({
+  auto: false
+});
+
+var customLoop = () => {
+  animate.loop();
+  requestAnimationFrame(customLoop);
+}
+customLoop();
 
 window.addEventListener('load', ()=>{
   var element = document.querySelector('#easing-test-patern');
@@ -51,10 +59,10 @@ window.addEventListener('load', ()=>{
     square.style.top = value + 'px';
   })
   
-  animate.then({
-    from: 500,
-    to: 0,
-  }).on('progress', ({value}) => {
-    square.style.top = value + 'px';
-  })
+  // animate.then({
+  //   from: 500,
+  //   to: 0,
+  // }).on('progress', ({value}) => {
+  //   square.style.top = value + 'px';
+  // })
 })
