@@ -32,7 +32,9 @@ class Animate extends Emitter {
   add(animation) {
 		const a = animation instanceof Animation 
 			? animation
-			: new Animation(animation);
+      : new Animation({...animation });
+      
+    a.timeline = this;
 		
     a.once("end", () => this.remove(a.id));
     this.animations.set(a.id, a);

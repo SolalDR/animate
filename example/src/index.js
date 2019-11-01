@@ -1,7 +1,11 @@
+import "./styles/main.scss"
 import animate, {Easing} from "./../../dist/index.umd.js";
+import RangeExample from "./scripts/RangeExample";
+
 animate.start({
   auto: false
 });
+
 
 var customLoop = () => {
   animate.loop();
@@ -9,60 +13,42 @@ var customLoop = () => {
 }
 customLoop();
 
+
+const a = animate
+  .add()
+  .on('progress', ({value}) => {
+    console.log('up', value);
+  })
+  .then({from: 1, to: 0})
+  .on('progress', ({value}) => {
+    console.log('down', value);
+  })
+  .and({from: 0, to: 1.5})
+  .on('progress', ({value}) => {
+    console.log('up (bis)', value);
+  })
+
+
+
 window.addEventListener('load', ()=>{
-  var element = document.querySelector('#easing-test-patern');
-  element.removeAttribute('id');
-
-  console.log(element);
   Object.keys(Easing).forEach(key => {
-    console.log(element);
-    var node = element.cloneNode(true);
-    element.parentNode.appendChild(node);
-
-    var rangeNode = node.querySelector('input');
-    var textNode = node.querySelector('p');
+    const example = new RangeExample();
+    example.setTitle(key);
     
     var anim = null;
-    node.addEventListener('mouseenter', () => {
-      console.time('test');
+    example.$element.addEventListener('mouseenter', () => {
       if (anim) return;
       var a = 0;
       anim = animate.add({
         to: 100,
-        duration: 7000,
+        duration: 600,
+        delay: 500,
         timingFunction: key
-      }).on('progress', ({value})=>{
-        rangeNode.value = value;
-        a++;
+      }).on('progress', (event)=>{
+        example.update(event);
       }).on('end', () => {
         anim = null;
-        console.log('end anim', a);
-        console.timeEnd('test');
       })
     });
-
-    node.addEventListener("mouseleave", () => {
-      anim = null;
-    })
-
-    textNode.innerHTML = key;
   })
-
-  element.style.display = 'none';
-
-
-  var square = document.querySelector('#square');
-  animate.add({
-    from: 0,
-    to: 500,
-  }).on('progress', ({value})=>{
-    square.style.top = value + 'px';
-  })
-  
-  // animate.then({
-  //   from: 500,
-  //   to: 0,
-  // }).on('progress', ({value}) => {
-  //   square.style.top = value + 'px';
-  // })
 })

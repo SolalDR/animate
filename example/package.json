@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@solaldr/emitter": "^0.1.0"
+  },
+  "devDependencies": {
+    "sass": "^1.23.2"
   }
 }
