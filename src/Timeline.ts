@@ -1,4 +1,4 @@
-import Emitter from "@solaldr/emitter";
+import { Emitter } from "@solaldr/emitter";
 import { Animation } from "./Animation";
 
 const raf = typeof window === 'undefined' 

@@ -1,9 +1,10 @@
 {
   "name": "@solaldr/animate",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "browser": "dist/umd/index.js",
+  "types": "dist/esm/index.d.ts",
   "license": "MIT",
   "homepage": "https://github.com/SolalDR/animate",
   "repository": "https://github.com/SolalDR/animate",
@@ -27,13 +28,13 @@
     "dev": "rollup -c -w",
     "test": "node test/test.js",
     "pretest": "npm run build",
-    "publish": "npm run build && npm run doc && npm publish --access public",
+    "deploy": "npm run build && npm run doc && npm publish --access public",
     "doc": "typedoc"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@solaldr/emitter": "^0.1.0"
+    "@solaldr/emitter": "^0.2.2"
   }
 }

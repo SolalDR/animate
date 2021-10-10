@@ -1,4 +1,4 @@
-import Emitter from "@solaldr/emitter"
+import { Emitter } from "@solaldr/emitter"
 import { Easing } from "./Easing"
 import { Timeline } from "./Timeline"
 

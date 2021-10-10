@@ -8,6 +8,8 @@ A lighter library for animation.
 No DOM abstraction, just animate your values with a cool easing.
 Agnostic, works fine on node server or web-workers.
 
+[Documentation](https://solaldr.github.io/animate/index.html) — [Source](https://github.com/SolalDR/animate)
+
 ## Getting started
 
 Clone this repository and install its dependencies:
