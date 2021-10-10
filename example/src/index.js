@@ -1,4 +1,4 @@
-import "./styles/main.scss"
+// import "./styles/main.scss"
 import animate, {Easing} from "./../../dist/index.umd.js";
 import RangeExample from "./scripts/RangeExample";
 
@@ -14,21 +14,28 @@ var customLoop = () => {
 customLoop();
 
 
-const a = animate
-  .add()
+// const a = animate
+//   .add()
+//   .on('progress', ({value}) => {
+//     console.log('up', value);
+//   })
+//   .then({from: 1, to: 0})
+//   .on('progress', ({value}) => {
+//     console.log('down', value);
+//   })
+//   .and({from: 0, to: 1.5})
+//   .on('progress', ({value}) => {
+//     console.log('up (bis)', value);
+//   })
+
+const fzeoifj = animate
+  .add({
+    from: 200,
+    to: 0.05
+  })
   .on('progress', ({value}) => {
     console.log('up', value);
   })
-  .then({from: 1, to: 0})
-  .on('progress', ({value}) => {
-    console.log('down', value);
-  })
-  .and({from: 0, to: 1.5})
-  .on('progress', ({value}) => {
-    console.log('up (bis)', value);
-  })
-
-
 
 window.addEventListener('load', ()=>{
   Object.keys(Easing).forEach(key => {

@@ -1,7 +1,33 @@
 import Emitter from "@solaldr/emitter"
-import Easing from "./Easing"
+import { Easing } from "./Easing"
+import { Timeline } from "./Timeline"
 
-class Animation extends Emitter {
+export type EasingFunction = (advancement: number) => number
+
+export interface AnimationConstructor {
+  from?: number
+  to?: number
+  duration?: number
+  delay?: number
+  timingFunction: EasingFunction | string
+  auto?: number
+  timeline?: any
+}
+
+export class Animation extends Emitter {
+  /** @ignore */
+  id: Symbol
+  playing: boolean = false
+  current: number = 0
+  from: number = 0
+  to: number = 0
+  delay: number = 0
+  duration: number = 0
+  advancement: number = 0
+  value: number = 0
+  timingFunction: EasingFunction
+  timeline: Timeline | null
+
   constructor({
     from = 0,
     to = 1,
@@ -14,34 +40,41 @@ class Animation extends Emitter {
     super();
     this.id = Symbol('animation');
     this.playing = false;
-    this.current = 0;
     this.from = from;
     this.to = to;
     this.delay = delay;
     this.duration = duration;
-    this.timingFunction = Easing[timingFunction];
+    this.timingFunction = typeof timingFunction === 'function' 
+      ? timingFunction 
+      : Easing[timingFunction];
     this.timeline = timeline;
     
     if (auto) this.start();
   }
 
-  then(params) {
+  private startAnimation(animation) {
+    if (this.timeline) {
+      animation.timeline = this.timeline;
+      animation.start();
+      this.timeline.add(animation);
+    }
+  }
+
+  /**
+   * Run the defined animation after the current one
+   * @param AnimationConstructor params 
+   */
+  then(params): Animation {
     const animation = params instanceof Animation 
       ? params 
       : new Animation({ ...params, auto: false });
 
-    this.once('end', () => {
-      if (this.timeline) {
-        animation.timeline = this.timeline;
-        animation.start();
-        this.timeline.add(animation);
-      }
-    })
+    this.once('end', () => this.startAnimation(animation))
 
     return animation;
   }
 
-  promise() {
+  promise(): Promise<Animation> {
     var resolver = null;
     return new Promise((resolve, reject) => {
       resolver = resolve;
@@ -51,7 +84,7 @@ class Animation extends Emitter {
     })
   }
   
-  and(params) {
+  and(params): Animation {
     const animation = params instanceof Animation 
       ? params 
       : new Animation({ ...params, auto: false });
@@ -61,19 +94,13 @@ class Animation extends Emitter {
       animation.start();
       this.timeline.add(animation);
     } else {
-      this.once('start', () => {
-        if (this.timeline) {
-          animation.timeline = this.timeline;
-          animation.start();
-          this.timeline.add(animation);
-        }
-      })
+      this.once('start', () => this.startAnimation(animation))
     }
 
     return animation;
   }
 
-  start() {
+  start(): Animation {
     if (this.delay > 0) {
       setTimeout(() => {
         this.playing = true;
@@ -89,15 +116,14 @@ class Animation extends Emitter {
     return this;
   }
 
-  stop() {
+  stop(): void {
     this.playing = false;
     this.current = 0;
+    this.emit("stop", this);
     this.emit("end", this);
   }
 
-  
-
-  render(delta) {
+  render(delta: number): void {
     if (!this.playing) return;
 
     this.current = Math.min(this.duration, this.current + delta);
@@ -118,5 +144,3 @@ class Animation extends Emitter {
     }
   }
 }
-
-export default Animation;

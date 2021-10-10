@@ -1,14 +1,26 @@
 import Emitter from "@solaldr/emitter";
-import Easing from "./Easing";
-import Animation from "./Animation";
+import { Animation } from "./Animation";
 
-class Animate extends Emitter {
-    
+const raf = typeof window === 'undefined' 
+  ? (cb) => setTimeout(cb, 16)
+  : requestAnimationFrame
+
+export class Timeline extends Emitter {
+  private _interval: number
+  private _enqueuedAnim
+  private _now: number
+  private _last: number
+
+  animations: Map<Symbol, Animation>
+  speed: number = 1
+  delta: number = 0
+  auto: boolean = false
+  fps: number
+
   constructor() {
     super();
 		this.animations = new Map();
     this.speed = 1;
-    this.rate = null;
     this.delta = 0;
 
     this._enqueuedAnim = null;
@@ -79,7 +91,7 @@ class Animate extends Emitter {
       this._last = this._now;
     }
     
-    if(this.auto) requestAnimationFrame(this.loop.bind(this));
+    if(this.auto) raf(this.loop.bind(this));
   }
 
   /**
@@ -91,6 +103,3 @@ class Animate extends Emitter {
     this.animations.forEach(a => a.render(delta))
   }
 }
-
-export { Animation, Animate, Easing }
-export default new Animate();

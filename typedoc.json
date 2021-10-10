@@ -1,0 +1,15 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "exclude": [
+    "example/*",
+    "src/helpers/*"
+  ],
+  "excludeExternals": true,
+  "excludeProtected": true,
+  "excludePrivate": true,
+
+  "plugin": "typedoc-neo-theme",
+  "categorizeByGroup": false,
+  "media": "media",
+  "out": "docs"
+}
